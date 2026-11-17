@@ -1,0 +1,76 @@
+---
+title: "Fuel Economy: A Quarto Demo"
+author: "Your Name"
+date: today
+date-format: long
+format:
+  html:
+    toc: true
+    embed-resources: true
+  pdf:
+    toc: true
+    papersize: letter
+    geometry: margin=1in
+  docx:
+    toc: true
+---
+
+
+## Introduction
+
+This short report looks at **highway fuel economy** in the `mpg` data that
+comes with the tidyverse. It shows the parts of a Quarto document: a header,
+text, and code chunks.
+
+## Data
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+Each row of `mpg` is one model of car. We use `hwy` (highway miles per gallon)
+and `displ` (engine size in liters).
+
+```{r}
+#| label: glimpse
+glimpse(mpg)
+```
+
+## Summary
+
+```{r}
+#| label: cutoff
+cutoff <- 30
+n_above <- sum(mpg$hwy > cutoff)
+share_above <- mean(mpg$hwy > cutoff)
+```
+
+In these data, `r n_above` of `r nrow(mpg)` models get more than `r cutoff`
+highway miles per gallon (`r round(100 * share_above, 1)`%).
+
+## A graphic
+
+```{r}
+#| label: fig-hwy
+#| fig-cap: "Larger engines tend to get fewer highway miles per gallon."
+#| fig-width: 6
+#| fig-height: 4
+#| warning: false
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  labs(x = "Engine displacement (liters)",
+       y = "Highway mileage (mpg)",
+       caption = "Source: mpg data frame in ggplot2")
+```
+
+@fig-hwy shows the pattern. This is a pattern in these cars, and it does not
+tell us that engine size causes the difference.
+
+## Reproducibility note
+
+Everything above is produced by code in this file. To reproduce the report,
+open the file and click Render.
