@@ -1,6 +1,6 @@
 ---
 title: "Fuel Economy: A Quarto Demo"
-author: "Jacob Cornejo"
+author: "Apples"
 date: today
 date-format: long
 format:
