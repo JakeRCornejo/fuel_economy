@@ -72,5 +72,4 @@ tell us that engine size causes the difference.
 
 ## Reproducibility note
 
-Everything above is produced by code in this file. To reproduce the report,
-open the file and click Render.
+This is me. 
